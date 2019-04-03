@@ -20,6 +20,9 @@ def lambda_handler(event, context):
     def get_playerguild(name):
         #Returns Guild and Alliance info. This also checks for empty users as there is a bug that someusers are listed multiple times but these 'Clones' only have 0 Fame
         rawusers = requests.get('https://gameinfo.albiononline.com/api/gameinfo/search?q='+name).json()
+        guild=''
+        alliance=''
+        guildname=''
         for albionplayer in rawusers["players"]:
             if (albionplayer['Name'].lower() == name.lower()) and (albionplayer['KillFame'] != 0):
                 guild = albionplayer['GuildId']
